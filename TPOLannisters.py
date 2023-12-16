@@ -1,4 +1,5 @@
 from tabulate import tabulate
+from typing import List
 
 def darFormato(lista: list) -> list:
     lista = [dato.rstrip().split(';') for dato in lista]
@@ -19,7 +20,7 @@ def cargarCSV(directorio: str) -> list:
 
 
 #-- Busqueda de paginas --#
-def buscarMayorPaginas(comics: list) -> int:
+def buscarMayorPaginas(comics: List[List[str]]) -> int:
     mayor = ""
     mayornum = int(comics[1][5])
     for i, linea in enumerate(comics[1:]):
@@ -29,7 +30,7 @@ def buscarMayorPaginas(comics: list) -> int:
             indx = i+1
     print(f"El Comic con mas paginas es:\n{mayor[0]} con {mayornum} paginas")
     return indx
-def buscarMenorPaginas(comics: list) -> int:
+def buscarMenorPaginas(comics: List[List[str]]) -> int:
     menor = ""
     menornum= int(comics[1][5])
     for i, linea in enumerate(comics[1:]):
@@ -39,7 +40,7 @@ def buscarMenorPaginas(comics: list) -> int:
             indx = i+1
     print(f"El Comic con menos paginas es:\n{menor[0]} con {menornum} paginas")
     return indx
-def buscarPorRango(comics: list) -> int :
+def buscarPorRango(comics: List[List[str]]) -> int :
     rangoinferior = 0
     rangosuperior = 0
     try:
@@ -60,7 +61,7 @@ def buscarPorRango(comics: list) -> int :
         else:
             print("No hay comics en el rango especificado")
 #--- Busqueda por año --#
-def buscarPorAño(comics: list) -> int:
+def buscarPorAño(comics: List[List[str]]) -> int:
     rangoinicial = 0
     rangofinal = 0
     try:
@@ -81,7 +82,7 @@ def buscarPorAño(comics: list) -> int:
         else:
             print("No hay comics en el rango especificado")
 #-- Busqueda por autor --#
-def busquedaPorAutor(comics: list) -> int:
+def busquedaPorAutor(comics: List[List[str]]) -> int:
         autor = ''
         while len(autor) < 3:
             autor = input("Ingrese el autor: ")
@@ -94,7 +95,7 @@ def busquedaPorAutor(comics: list) -> int:
         else:
             print("No se encontraron comics para el autor ingresado, intentelo nuevamente.")
 #-- Busqueda por autor --#
-def busquedaPorGenero(comics: list) -> int:
+def busquedaPorGenero(comics: List[List[str]]) -> int:
         genero = ''
         while len(genero) < 3:
             genero = input("Ingrese el género: ")
@@ -108,7 +109,7 @@ def busquedaPorGenero(comics: list) -> int:
             print("No se encontraron comics para el género ingresado, intentelo nuevamente.")
 
 #-- Busqueda por editorial --#
-def busquedaPorEditorial(comics: list) -> int:
+def busquedaPorEditorial(comics: List[List[str]]) -> int:
         editorial = ''
         while len(editorial) < 3:
             editorial = input("Ingrese la editorial: ")
@@ -122,7 +123,7 @@ def busquedaPorEditorial(comics: list) -> int:
             print("No se encontraron comics que coincidan con la editorial ingresada, inténtelo nuevamente.")
 
 
-def seleccionarComic(comics: list, lista: list) -> int:
+def seleccionarComic(comics: List[List[str]], lista: list) -> int:
     while True:
         try:
             num = int(input('Seleccione uno de los comics, -1 para salir: '))
@@ -139,7 +140,7 @@ def seleccionarComic(comics: list, lista: list) -> int:
                     
 
 
-def exportarCSV(comics:list) ->  None:
+def exportarCSV(comics: List[List[str]]) ->  None:
     try:
         with open ('C:\\Users\\54224\\Desktop\\TPO\\comicsexportados.csv', 'wt', encoding='utf-8-sig') as archivo:
             for comic in comics:
@@ -179,7 +180,7 @@ def opcionesPaginas():
 0 - Salir\n""")
     
 
-def agregarComic(comics:list) -> None:
+def agregarComic(comics: List[List[str]]) -> None:
 
     while True:
         titulo = ''
@@ -219,7 +220,7 @@ def agregarComic(comics:list) -> None:
         else:
             print('Descartando..')  
 
-def appendearCsv(directorio:str, comic:list) -> None:
+def appendearCsv(directorio:str, comic: List[str]) -> None:
     try:
         with open(directorio, 'a', encoding='utf-8-sig') as archivo:
                 dato = ';'.join(comic) + '\n'
@@ -229,7 +230,7 @@ def appendearCsv(directorio:str, comic:list) -> None:
     else:
         print('Comic añadido al CSV')
 
-def borrarComic(comics:list) -> None:
+def borrarComic(comics: List[List[str]]) -> None:
     i = buscarIndice(comics)
     if i == -1 or i == None:
         return None
@@ -266,7 +267,7 @@ def cargarIntPositivo()-> int:
 
     
 
-def modificarComic(comics:list)-> None:
+def modificarComic(comics: List[List[str]])-> None:
     i = buscarIndice(comics)
     if i == -1 or i == None:
         return None
@@ -308,7 +309,7 @@ def modificarComic(comics:list)-> None:
         
 
 
-def altaBajaModificacion(comics:list) -> None:
+def altaBajaModificacion(comics: List[List[str]]) -> None:
     while True:
         opcionesABM()
         opcion = input('Seleccione una de las opciones: ')
@@ -335,7 +336,7 @@ def opcionesBusqueda():
 6 - Editorial
 0 - Salir\n""")
  
-def seleccionPaginas(comics:list) -> None:
+def seleccionPaginas(comics: List[List[str]]) -> None:
     while True:
         opPagina = input('Ingrese una opción :')
         if opPagina == '0':
@@ -349,7 +350,7 @@ def seleccionPaginas(comics:list) -> None:
         else:
             print('Opción incorrecta')
     
-def buscarIndice(comics:list) -> int:
+def buscarIndice(comics: List[List[str]]) -> int:
     while True:
         opcionesBusqueda()
         opb = input('Ingrese la opción para la busqueda: ')
